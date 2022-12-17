@@ -19,7 +19,5 @@ def get_gdp() -> pd.Series:
     df.rename(columns={df.columns[0]: "GDP"}, inplace=True)
     df.set_index("date", inplace=True)
     df.sort_index(ascending=True, inplace=True)
-    s = df.squeeze()
-
-    return s
+    return df.squeeze()
 
