@@ -3,11 +3,12 @@ from io import StringIO
 
 import ons
 
+base_key = "regional-gdp-by-quarter"
 def get_gdp() -> pd.Series:
-    jresp = ons.request_data.get_data_frame()
+    jresp = ons.request_data.get_data_frame(key=base_key)
     df = pd.read_csv(StringIO(jresp), engine='python', encoding='utf-8',
-                     usecols=["V4_1", "Time", "nuts", "sic-unofficial", "GrowthRate"],
-                     dtype={"V4_1": float},
+                     usecols=["v4_1", "Time", "nuts", "sic-unofficial", "GrowthRate"],
+                     dtype={"v4_1": float},
                      parse_dates=["Time"],
                      )
     df = df[df['nuts'] == 'UK0']
@@ -18,12 +19,5 @@ def get_gdp() -> pd.Series:
     df.rename(columns={df.columns[0]: "GDP"}, inplace=True)
     df.set_index("date", inplace=True)
     df.sort_index(ascending=True, inplace=True)
-    s = df.squeeze()
+    return df.squeeze()
 
-    return s
-
-def get_infl_from_gdp( data: pd.Series) ->pd.Series:
-    s = data.pct_change().round(4)
-    s = s.dropna()
-    s.name = "Inflation"
-    return s

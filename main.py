@@ -1,10 +1,10 @@
 import ons
 
 
-val = ons.gdp.get_gdp()
+val = ons.infl.get_cp()
 print(val)
 
-val = ons.gdp.get_infl_from_gdp(val)
+val = ons.infl.get_inflation()
 print(val)
 
-print(ons.__version__)
+
