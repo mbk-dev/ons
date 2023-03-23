@@ -6,7 +6,8 @@ import ons
 
 def get_gdp() -> pd.Series:
     gdp_key = "regional-gdp-by-quarter"
-    jresp = ons.request_data.get_data_frame(key=gdp_key)
+    jresp = ons.request_data.get_data(key=gdp_key)
+    # TODO: change read_cav - not working
     df = pd.read_csv(StringIO(jresp),
                      engine='python',
                      encoding='utf-8',

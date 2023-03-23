@@ -8,7 +8,7 @@ from urllib3.util.retry import Retry
 URL_BASE = "https://api.beta.ons.gov.uk/v1/datasets/"
 
 
-def get_data_frame(key: str):
+def get_data(key: str):
     request_url = URL_BASE+key
     d = _connect_to_uk_api(request_url)
     url_ts = d['links']['latest_version']['href']

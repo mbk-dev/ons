@@ -14,7 +14,7 @@ def get_cpih() -> pd.Series:
     along with council tax.
     """
     key_cpih = "cpih01"
-    jresp = ons.request_data.get_data_frame(key=key_cpih)
+    jresp = ons.request_data.get_data(key=key_cpih)
     df = pd.read_csv(StringIO(jresp),
                      engine='python',
                      encoding='utf-8')
