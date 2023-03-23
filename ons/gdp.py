@@ -3,12 +3,15 @@ from io import StringIO
 
 import ons
 
-base_key = "regional-gdp-by-quarter"
+
 def get_gdp() -> pd.Series:
-    jresp = ons.request_data.get_data_frame(key=base_key)
-    df = pd.read_csv(StringIO(jresp), engine='python', encoding='utf-8',
-                     usecols=["v4_1", "Time", "nuts", "sic-unofficial", "GrowthRate"],
-                     dtype={"v4_1": float},
+    gdp_key = "regional-gdp-by-quarter"
+    jresp = ons.request_data.get_data_frame(key=gdp_key)
+    df = pd.read_csv(StringIO(jresp),
+                     engine='python',
+                     encoding='utf-8',
+                     usecols=["V4_1", "Time", "nuts", "sic-unofficial", "GrowthRate"],
+                     dtype={"V4_1": float},
                      parse_dates=["Time"],
                      )
     df = df[df['nuts'] == 'UK0']
@@ -19,5 +22,4 @@ def get_gdp() -> pd.Series:
     df.rename(columns={df.columns[0]: "GDP"}, inplace=True)
     df.set_index("date", inplace=True)
     df.sort_index(ascending=True, inplace=True)
-    return df.squeeze()
-
+    return df.squeeze(axis=1)
