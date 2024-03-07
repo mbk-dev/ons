@@ -7,12 +7,12 @@ import ons
 def get_gdp() -> pd.Series:
     gdp_key = "regional-gdp-by-quarter"
     jresp = ons.request_data.get_data(key=gdp_key)
-    # TODO: change read_cav - not working
+    # TODO: the data available up to 2022 Q3
     df = pd.read_csv(StringIO(jresp),
                      engine='python',
                      encoding='utf-8',
-                     usecols=["V4_1", "Time", "nuts", "sic-unofficial", "GrowthRate"],
-                     dtype={"V4_1": float},
+                     usecols=["v4_1", "Time", "nuts", "sic-unofficial", "GrowthRate"],
+                     dtype={"v4_1": float},
                      parse_dates=["Time"],
                      )
     df = df[df['nuts'] == 'UK0']
