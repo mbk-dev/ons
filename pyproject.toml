@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ons"
-version = "1.0.0"
+version = "1.0.1"
 description = "UK Office for National Statistics (ONS) API Python interface"
 authors = ["fzhulitov <fzhulitov@gmail.com>"]
 readme = "README.md"
@@ -8,7 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = ">=3.14,<4.0.0"
 requests = "*"
-pandas = "^2.0.0"
+pandas = ">=2.0.0,<4.0.0"
 importlib-metadata = "*"
 lxml = "*"
 
